@@ -12,12 +12,14 @@ public class ObstacleSpawner : MonoBehaviour
     public GameManager gameManager;
 
     public int playerId;
-    
+
+    private KickController kickControllerScript;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        KickControllerScript = this.gameObject.GetComponent<KickController>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,8 @@ public class ObstacleSpawner : MonoBehaviour
             {
                 if (this.IsSpawnPossible())
                 {
+                    KickControllerScript.IsKickCoolDown = true;
+                    KickControllerScript.KickRechargeTime = 0f;
                     this.SpawnObstacle();
                 }
             }
@@ -38,6 +42,8 @@ public class ObstacleSpawner : MonoBehaviour
             {
                 if (this.IsSpawnPossible())
                 {
+                    KickControllerScript.IsKickCoolDown = true;
+                    KickControllerScript.KickRechargeTime = 0f;
                     this.SpawnObstacle();
                 }
             }
@@ -113,4 +119,6 @@ public class ObstacleSpawner : MonoBehaviour
         return positionToSnap;
 
     }
+
+    public KickController KickControllerScript { get => kickControllerScript; set => kickControllerScript = value; }
 }
